@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Person from './Person/Person';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = props => {
+    const [personsState, setPersonsState] = useState({
+        person: [
+            {name: 'shivani', age: 28},
+            {name: 'anu', age: 16},
+            {name: 'koko', age: 28}
+        ]
+    });
+
+    const changeNameHandle = () => {
+        setPersonsState({
+            person: [
+                {name: 'panu', age: 28},
+                {name: 'anu', age: 16},
+                {name: 'koko', age: 28}
+            ]
+        });
+    };
+
+    return (
+        <div className="App">
+            <h1>HELLO</h1>
+            <button onClick={changeNameHandle}>Click Here</button>
+            <Person name={personsState.person[0].name} age={personsState.person[0].age} />
+            <Person name={personsState.person[1].name} age={personsState.person[1].name}>
+                Nested Function
+            </Person>
+        </div>
+    );
+
 }
 
 export default App;
