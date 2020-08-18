@@ -21,12 +21,27 @@ const App = props => {
         });
     };
 
+    const changeClickHandle = (event) => {
+        setPersonsState({
+            person: [
+                {name: 'panu', age: 28},
+                {name: event.target.value, age: 16},
+                {name: 'koko', age: 28}
+            ]
+        });
+    };
+
     return (
         <div className="App">
             <h1>HELLO</h1>
             <button onClick={changeNameHandle}>Click Here</button>
-            <Person name={personsState.person[0].name} age={personsState.person[0].age} />
-            <Person name={personsState.person[1].name} age={personsState.person[1].name}>
+            <Person
+                name={personsState.person[0].name}
+                age={personsState.person[0].age} />
+            <Person
+                name={personsState.person[1].name}
+                age={personsState.person[1].name}
+                change={changeClickHandle}>
                 Nested Function
             </Person>
         </div>
