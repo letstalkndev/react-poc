@@ -38,23 +38,28 @@ class App extends Component {
     }
 
     render() {
+
+        let persons = null;
+
+        if(this.state.showPerson) {
+            persons = (
+                <div>
+                    {this.state.person.map(peer => {
+                        return <Person
+                        name={peer.name}
+                        age={peer.age}/>
+                    })}
+                </div>
+            )
+        }
+
         return (
             <div className="App">
                 <h1>HELLO</h1>
                 <button onClick={this.toggleHandler}>Click Here</button>
                 {
                     this.state.showPerson ?
-                    <div>
-                        <Person
-                            name={this.state.person[0].name}
-                            age={this.state.person[0].age} />
-                        <Person
-                            name={this.state.person[1].name}
-                            age={this.state.person[1].name}
-                            change={this.changeClickHandle}>
-                            Nested Function
-                        </Person>
-                    </div> : null
+                    persons : null
                 }
             </div>
         );
