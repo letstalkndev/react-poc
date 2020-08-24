@@ -5,30 +5,25 @@ import Person from './Person/Person';
 class App extends Component {
     state = {
         person: [
-            {name: 'shivani', age: 28},
-            {name: 'anu', age: 16},
-            {name: 'koko', age: 28}
+            {id:1, name: 'shivani', age: 28},
+            {id:2, name: 'anu', age: 16},
+            {id:3, name: 'koko', age: 28}
         ],
         showPerson : false
     }
 
-    changeNameHandle = () => {
-        this.setState({
-            person: [
-                {name: 'panu', age: 28},
-                {name: 'anu', age: 16},
-                {name: 'koko', age: 28}
-            ]
-        });
-    };
+    changeNameHandle = (event, id) => {
+        const personIndex = this.state.person.findIndex(p => {return p.id === id});
+        const person = {
+            ...this.state.person[personIndex]
+        };
+        person.name = event.target.value;
 
-    changeClickHandle = (event) => {
+        const persons = [...this.state.person];
+        persons[personIndex] = person;
+
         this.setState({
-            person: [
-                {name: 'panu', age: 28},
-                {name: event.target.value, age: 16},
-                {name: 'koko', age: 28}
-            ]
+            person: persons
         });
     };
 
@@ -47,7 +42,9 @@ class App extends Component {
                     {this.state.person.map(peer => {
                         return <Person
                         name={peer.name}
-                        age={peer.age}/>
+                        age={peer.age}
+                        key={peer.id}
+                        change={(event) => this.changeNameHandle(event, peer.id)}/>
                     })}
                 </div>
             )
