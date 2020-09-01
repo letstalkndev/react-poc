@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
     state = {
@@ -33,31 +34,21 @@ class App extends Component {
     }
 
     render() {
-
         let persons = null;
-
         if(this.state.showPerson) {
             persons = (
                 <div>
-                    {this.state.person.map(peer => {
-                        return <Person
-                        name={peer.name}
-                        age={peer.age}
-                        key={peer.id}
-                        change={(event) => this.changeNameHandle(event, peer.id)}/>
-                    })}
+                    <Persons
+                        person={this.state.person}
+                        changed={this.changeNameHandle} />
                 </div>
             )
         }
 
         return (
             <div className="App">
-                <h1>HELLO</h1>
-                <button onClick={this.toggleHandler}>Click Here</button>
-                {
-                    this.state.showPerson ?
-                    persons : null
-                }
+                <Cockpit toggled={this.toggleHandler} />
+                {persons}
             </div>
         );
     }
